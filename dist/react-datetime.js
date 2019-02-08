@@ -1,6 +1,6 @@
 /*
-react-datetime v2.16.2
-https://github.com/YouCanBookMe/react-datetime
+@pducks32/react-datetime v2.17.0
+https://github.com/pducks32/react-datetime
 MIT: https://github.com/YouCanBookMe/react-datetime/raw/master/LICENSE
 */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -12,7 +12,7 @@ MIT: https://github.com/YouCanBookMe/react-datetime/raw/master/LICENSE
 		exports["Datetime"] = factory(require("React"), require("moment"), require("ReactDOM"));
 	else
 		root["Datetime"] = factory(root["React"], root["moment"], root["ReactDOM"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_16__, __WEBPACK_EXTERNAL_MODULE_23__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_16__, __WEBPACK_EXTERNAL_MODULE_17__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -66,8 +66,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		createClass = __webpack_require__(11),
 		moment = __webpack_require__(16),
 		React = __webpack_require__(12),
-		CalendarContainer = __webpack_require__(17),
-		onClickOutside = __webpack_require__(22).default
+		ReactDOM = __webpack_require__(17),
+		CalendarContainer = __webpack_require__(18),
+		onClickOutside = __webpack_require__(23).default
 		;
 
 	var viewModes = Object.freeze({
@@ -80,6 +81,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var TYPES = PropTypes;
 	var Datetime = createClass({
 		displayName: 'DateTime',
+		modelContainerElement: document.createElement('div'),
 		propTypes: {
 			// value: TYPES.object | TYPES.string,
 			// defaultValue: TYPES.object | TYPES.string,
@@ -103,7 +105,16 @@ return /******/ (function(modules) { // webpackBootstrap
 			open: TYPES.bool,
 			strictParsing: TYPES.bool,
 			closeOnSelect: TYPES.bool,
-			closeOnTab: TYPES.bool
+			closeOnTab: TYPES.bool,
+			usePortal: TYPES.bool,
+		},
+
+		componentDidMount: function() {
+			document.body.appendChild(this.modelContainerElement);
+		},
+
+		componentWillUnmount: function() {
+			document.body.removeChild(this.modelContainerElement);
 		},
 
 		getInitialState: function() {
@@ -554,10 +565,18 @@ return /******/ (function(modules) { // webpackBootstrap
 			if ( this.props.open || (this.props.open === undefined && this.state.open ) )
 				className += ' rdtOpen';
 
+			var datePicker = React.createElement(CalendarContainer, {
+				view: this.state.currentView,
+				viewProps: this.getComponentProps(),
+			});
+
+			if (this.props.usePortal)
+				datePicker = ReactDOM.createPortal(datePicker, this.modelContainerElement);
+
 			return React.createElement( ClickableWrapper, {className: className, onClickOut: this.handleClickOutside}, children.concat(
 				React.createElement( 'div',
 					{ key: 'dt', className: 'rdtPicker' },
-					React.createElement( CalendarContainer, { view: this.state.currentView, viewProps: this.getComponentProps() })
+					datePicker
 				)
 			));
 		}
@@ -2768,16 +2787,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 /* 17 */
+/***/ (function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_17__;
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(12),
 		createClass = __webpack_require__(11),
-		DaysView = __webpack_require__(18),
-		MonthsView = __webpack_require__(19),
-		YearsView = __webpack_require__(20),
-		TimeView = __webpack_require__(21)
+		DaysView = __webpack_require__(19),
+		MonthsView = __webpack_require__(20),
+		YearsView = __webpack_require__(21),
+		TimeView = __webpack_require__(22)
 		;
 
 	var CalendarContainer = createClass({
@@ -2797,7 +2822,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2942,7 +2967,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3050,7 +3075,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3156,7 +3181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3394,7 +3419,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3405,7 +3430,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react = __webpack_require__(12);
 
-	var _reactDom = __webpack_require__(23);
+	var _reactDom = __webpack_require__(17);
 
 	var _generateOutsideCheck = __webpack_require__(24);
 
@@ -3651,12 +3676,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return WrappedComponent.getClass ? WrappedComponent.getClass() : WrappedComponent;
 	  }, _temp2;
 	}
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_23__;
 
 /***/ }),
 /* 24 */
