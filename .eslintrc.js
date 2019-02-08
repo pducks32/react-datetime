@@ -39,4 +39,4 @@ module.exports = {
         // Enforce using tabs for indentation
         "indent": [2, "tab", { "SwitchCase": 1 }]
     }
-};
+}; 

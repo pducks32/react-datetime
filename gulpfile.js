@@ -1,5 +1,4 @@
-const babel = require('gulp-babel'),
-	gulp = require('gulp'),
+const	gulp = require('gulp'),
 	insert = require('gulp-insert'),
 	plumber = require('gulp-plumber'),
 	rename = require('gulp-rename'),
