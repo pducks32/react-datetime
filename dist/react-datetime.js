@@ -565,19 +565,19 @@ return /******/ (function(modules) { // webpackBootstrap
 			if ( this.props.open || (this.props.open === undefined && this.state.open ) )
 				className += ' rdtOpen';
 
-			var datePicker = React.createElement(CalendarContainer, {
-				view: this.state.currentView,
-				viewProps: this.getComponentProps(),
-			});
+			var datePicker = React.createElement( 'div',
+				{ key: 'dt', className: 'rdtPicker' },
+				React.createElement(CalendarContainer, {
+					view: this.state.currentView,
+					viewProps: this.getComponentProps(),
+				})
+			);
 
 			if (this.props.usePortal)
 				datePicker = ReactDOM.createPortal(datePicker, this.modelContainerElement);
 
 			return React.createElement( ClickableWrapper, {className: className, onClickOut: this.handleClickOutside}, children.concat(
-				React.createElement( 'div',
-					{ key: 'dt', className: 'rdtPicker' },
-					datePicker
-				)
+				datePicker
 			));
 		}
 	});
