@@ -504,6 +504,14 @@ var Datetime = createClass({
 		if ( this.props.open || (this.props.open === undefined && this.state.open ) )
 			className += ' rdtOpen';
 
+		var datePicker = React.createElement(CalendarContainer, {
+			view: this.state.currentView,
+			viewProps: this.getComponentProps(),
+		});
+
+		if (this.props.usePortal)
+			datePicker = ReactDOM.createPortal(datePicker, this.modelContainerElement);
+
 		return React.createElement( ClickableWrapper, {className: className, onClickOut: this.handleClickOutside}, children.concat(
 			React.createElement( 'div',
 				{ key: 'dt', className: 'rdtPicker' },
@@ -512,17 +520,10 @@ var Datetime = createClass({
 		));
 	}
 });
-		var datePicker = React.createElement(CalendarContainer, {
-			view: this.state.currentView,
-			viewProps: this.getComponentProps(),
-		});
 
 var ClickableWrapper = onClickOutside( createClass({
 	render: function() {
 		return React.createElement( 'div', { className: this.props.className }, this.props.children );
-		if (this.props.usePortal) {
-			datePicker = ReactDOM.createPortal(datePicker, this.modelContainerElement);
-		}
 	},
 	handleClickOutside: function( e ) {
 		this.props.onClickOut( e );
