@@ -157,6 +157,13 @@ declare module ReactDatetime {
      close it.
     */
     disableOnClickOutside?: boolean;
+
+    /*
+     When true, keep the picker in a seperate node on the Document's body so that it is not obscured
+     behind an `overflow: hidden` or `z-index` issue. When false, render the date picker modal next
+     to the input element.
+    */
+    usePortal?: boolean;
   }
 
   interface DatetimeComponent extends React.ComponentClass<DatetimepickerProps> {
