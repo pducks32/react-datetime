@@ -20,6 +20,7 @@ var viewModes = Object.freeze({
 var TYPES = PropTypes;
 var Datetime = createClass({
 	displayName: 'DateTime',
+	modelContainerElement: document.createElement('div'),
 	propTypes: {
 		// value: TYPES.object | TYPES.string,
 		// defaultValue: TYPES.object | TYPES.string,
@@ -43,7 +44,16 @@ var Datetime = createClass({
 		open: TYPES.bool,
 		strictParsing: TYPES.bool,
 		closeOnSelect: TYPES.bool,
-		closeOnTab: TYPES.bool
+		closeOnTab: TYPES.bool,
+		usePortal: TYPES.bool,
+	},
+
+	componentDidMount: function() {
+		document.body.appendChild(this.modelContainerElement);
+	},
+
+	componentWillUnmount: function() {
+		document.body.removeChild(this.modelContainerElement);
 	},
 
 	getInitialState: function() {
