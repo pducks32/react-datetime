@@ -1,6 +1,8 @@
+**WARNING:** This is a fork of [YouCanBookMe/react-datetime](https://github.com/YouCanBookMe/react-datetime) but I needed it to support React's Portal element. Also the original is outdated and has a lot of security holes.
+
 # react-datetime
 
-[![Build Status](https://api.travis-ci.org/YouCanBookMe/react-datetime.svg?branch=master)](https://travis-ci.org/YouCanBookMe/react-datetime.svg?branch=master)
+[![Build Status](https://api.travis-ci.org/YouCanBookMe/react-datetime.svg?branch=master)](https://travis-ci.org/pducks32/react-datetime.svg?branch=master)
 [![npm version](https://badge.fury.io/js/react-datetime.svg)](http://badge.fury.io/js/react-datetime)
 
 A date and time picker in the same React.js component. It can be used as a datepicker, timepicker or both at the same time. It is **highly customizable** and it even allows to edit date's milliseconds.
@@ -11,12 +13,12 @@ This project started as a fork of https://github.com/quri/react-bootstrap-dateti
 
 Install using npm:
 ```sh
-npm install --save react-datetime
+npm install --save @pducks32/react-datetime
 ```
 
 Install using yarn:
 ```sh
-yarn add react-datetime
+yarn add @pducks32/react-datetime
 ```
 
 ## Usage
@@ -25,7 +27,7 @@ yarn add react-datetime
 
 
 ```js
-require('react-datetime');
+require('@pducks32/react-datetime');
 
 ...
 
@@ -35,7 +37,7 @@ render: function() {
 ```
 [See this example working](http://codepen.io/simeg/pen/mEmQmP).
 
-**Don't forget to add the [CSS stylesheet](https://github.com/YouCanBookMe/react-datetime/blob/master/css/react-datetime.css) to make it work out of the box.**
+**Don't forget to add the [CSS stylesheet](https://github.com/pducks32/react-datetime/blob/master/css/react-datetime.css) to make it work out of the box.**
 
 ## API
 
