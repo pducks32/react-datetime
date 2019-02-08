@@ -57,8 +57,6 @@ var Datetime = createClass({
 	},
 
 	getInitialState: function() {
-		this.checkTZ( this.props );
-		
 		var state = this.getStateFromProps( this.props );
 
 		if ( state.open === undefined )
@@ -66,6 +64,8 @@ var Datetime = createClass({
 
 		state.currentView = this.props.dateFormat ?
 			(this.props.viewMode || state.updateOn || viewModes.DAYS) : viewModes.TIME;
+
+		this.checkTZ( this.props );
 
 		return state;
 	},
