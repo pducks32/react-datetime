@@ -9,16 +9,15 @@ const	gulp = require('gulp'),
 	;
 
 const pack = require( './package.json' );
-
-gulp.task( 'sub', () => {
+exports.sub = function sub() {
 	// Reason behind having sub as separate task:
 	// https://github.com/shama/webpack-stream/issues/114
 	return gulp.src( './DateTime.js' )
 		.pipe( webpack( getWebpackConfig() ) )
 		.pipe( gulp.dest( 'tmp/' ) );
-});
+}
 
-gulp.task( 'build', ['sub'], () => {
+exports.build = gulp.series(exports.sub, () => {
 	return gulp.src( ['tmp/react-datetime.js'] )
 		.pipe( sourcemaps.init( { loadMaps: true } ) )
 			.pipe( through.obj( function( file, enc, cb ) {
@@ -40,7 +39,7 @@ gulp.task( 'build', ['sub'], () => {
 	// TODO: Remove tmp folder
 });
 
-gulp.task( 'default', ['build'] );
+exports.default = exports.build;
 
 /*
  * Utility functions
