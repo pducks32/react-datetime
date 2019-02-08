@@ -5,6 +5,7 @@ var assign = require('object-assign'),
 	createClass = require('create-react-class'),
 	moment = require('moment'),
 	React = require('react'),
+	ReactDOM = require('react-dom'),
 	CalendarContainer = require('./src/CalendarContainer'),
 	onClickOutside = require('react-onclickoutside').default
 	;
