@@ -5,6 +5,13 @@
 .rdt {
   position: relative;
 }
+
+
+.rdtOpen {
+  display: block;
+  position: absolute;
+}
+
 .rdtPicker {
   display: none;
   position: absolute;

@@ -514,6 +514,8 @@ var Datetime = createClass({
 			className += ' rdtOpen';
 		}
 
+		this.modelContainerElement.classList.toggle('rdtOpen', this.props.open || (this.props.open === undefined && this.state.open ));
+
 		var datePicker = React.createElement( 'div',
 			{ key: 'dt', className: otherThings },
 			React.createElement(CalendarContainer, {
