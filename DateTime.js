@@ -20,6 +20,7 @@ var viewModes = Object.freeze({
 var TYPES = PropTypes;
 var Datetime = createClass({
 	displayName: 'DateTime',
+	_inputRef: null,
 	modelContainerElement: document.createElement('div'),
 	propTypes: {
 		// value: TYPES.object | TYPES.string,
@@ -472,6 +473,13 @@ var Datetime = createClass({
 		return this.overridenEvents[handler];
 	},
 
+	handleInputRef: function(ref) {
+		this._inputRef = ref;
+		var rect = this._inputRef.getBoundingClientRect();
+		this.modelContainerElement.style.top = rect.top + 'px';
+		this.modelContainerElement.style.left = rect.left + 'px';
+	},
+
 	render: function() {
 		// TODO: Make a function or clean up this code,
 		// logic right now is really hard to follow
@@ -482,7 +490,7 @@ var Datetime = createClass({
 
 		if ( this.props.input ) {
 			var finalInputProps = assign(
-				{ type: 'text', className: 'form-control', value: this.state.inputValue },
+				{ type: 'text', className: 'form-control', value: this.state.inputValue, ref: this.handleInputRef },
 				this.props.inputProps,
 				{
 					onClick: this.overrideEvent( 'onClick', this.openCalendar ),
@@ -500,12 +508,14 @@ var Datetime = createClass({
 		} else {
 			className += ' rdtStatic';
 		}
-
-		if ( this.props.open || (this.props.open === undefined && this.state.open ) )
+		var otherThings = 'rdtPicker';
+		if ( this.props.open || (this.props.open === undefined && this.state.open ) ) {
+			otherThings += ' rdtOpen';
 			className += ' rdtOpen';
+		}
 
 		var datePicker = React.createElement( 'div',
-			{ key: 'dt', className: 'rdtPicker' },
+			{ key: 'dt', className: otherThings },
 			React.createElement(CalendarContainer, {
 				view: this.state.currentView,
 				viewProps: this.getComponentProps(),
