@@ -474,6 +474,7 @@ var Datetime = createClass({
 	},
 
 	handleInputRef: function(ref) {
+		if (!this.props.usePortal) { return; }
 		this._inputRef = ref;
 		var rect = this._inputRef.getBoundingClientRect();
 		this.modelContainerElement.style.top = rect.top + 'px';
@@ -514,7 +515,8 @@ var Datetime = createClass({
 			className += ' rdtOpen';
 		}
 
-		this.modelContainerElement.classList.toggle('rdtOpen', this.props.open || (this.props.open === undefined && this.state.open ));
+		if (this.props.usePortal)
+			this.modelContainerElement.classList.toggle('rdtOpen', this.props.open || (this.props.open === undefined && this.state.open ));
 
 		var datePicker = React.createElement( 'div',
 			{ key: 'dt', className: otherThings },
