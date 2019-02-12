@@ -517,6 +517,7 @@ var Datetime = createClass({
 
 		if (this.props.usePortal) {
 			this.modelContainerElement.classList.toggle('rdtOpen', this.props.open || (this.props.open === undefined && this.state.open ));
+			this.modelContainerElement.classList.add('ignore-react-onclickoutside');
 		}
 
 		var datePicker = React.createElement( 'div',
