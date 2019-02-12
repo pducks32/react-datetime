@@ -1,5 +1,5 @@
 /*
-@pducks32/react-datetime v2.17.4
+@pducks32/react-datetime v2.17.5
 https://github.com/pducks32/react-datetime
 MIT: https://github.com/YouCanBookMe/react-datetime/raw/master/LICENSE
 */
@@ -576,8 +576,10 @@ return /******/ (function(modules) { // webpackBootstrap
 				className += ' rdtOpen';
 			}
 
-			if (this.props.usePortal)
+			if (this.props.usePortal) {
 				this.modelContainerElement.classList.toggle('rdtOpen', this.props.open || (this.props.open === undefined && this.state.open ));
+				this.modelContainerElement.classList.add('ignore-react-onclickoutside');
+			}
 
 			var datePicker = React.createElement( 'div',
 				{ key: 'dt', className: otherThings },
