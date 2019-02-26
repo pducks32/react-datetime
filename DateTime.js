@@ -21,7 +21,7 @@ var TYPES = PropTypes;
 var Datetime = createClass({
 	displayName: 'DateTime',
 	_inputRef: null,
-	modelContainerElement: document.createElement('div'),
+	modelContainerElement: null,
 	propTypes: {
 		// value: TYPES.object | TYPES.string,
 		// defaultValue: TYPES.object | TYPES.string,
@@ -62,6 +62,8 @@ var Datetime = createClass({
 
 		if ( state.open === undefined )
 			state.open = !this.props.input;
+
+		this.modelContainerElement = document.createElement('div');
 
 		state.currentView = this.props.dateFormat ?
 			(this.props.viewMode || state.updateOn || viewModes.DAYS) : viewModes.TIME;
